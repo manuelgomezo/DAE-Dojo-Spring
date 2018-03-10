@@ -12,11 +12,11 @@ import java.util.Date;
 
 @Entity //Define que la clase es una entidad
 @Table(name = "post") //Indeca que esta entidad va a ser mapeada en una tabla de la bd
-@EntityListener(AuditingEntityListener.class) //Escucha eventos de modificacion
+@EntityListeners(AuditingEntityListener.class) //Escucha eventos de modificacion
 @JsonIgnoreProperties(value = {"createAt", "updatedAt"}, 
             allowGetters = true) //Inora unas propiedades
 public class Post {
-    @id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -26,14 +26,14 @@ public class Post {
     @NotBlank
     private String content;
 
-    @Colum(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP) //Especificar que va a ser de tipo TIMESTAMP
-    @CreateDate //Al momento de crear guardar la fecha
+    @CreatedDate //Al momento de crear guardar la fecha
     private Date createdAt;
 
-    @Colum(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP) //Especificar que va a ser de tipo TIMESTAMP
-    @CreateDate 
+    @CreatedDate 
     @LastModifiedDate
     private Date updatedAt;
 
